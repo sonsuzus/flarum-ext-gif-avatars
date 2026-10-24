@@ -7,11 +7,11 @@
     "type": "flarum-extension",
     "license": "Unlicense",
     "require": {
-        "php": "^8.0",
-        "flarum/core": "^1.8"
+        "php": "^8.3",
+        "flarum/core": "^2.0"
     },
     "require-dev": {
-        "laravel/pint": "^1.5.0"
+        "laravel/pint": "^1.13.0"
     },
     "authors": [
         {

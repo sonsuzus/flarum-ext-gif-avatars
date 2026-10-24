@@ -1,12 +1,39 @@
-/vendor
-composer.lock
-composer.phar
-
-.DS_Store
+# Windows & OS
 Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Visual Studio Code & IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# PHP / Composer
+/vendor/
+composer.phar
+composer.lock
+
+# Node.js & NPM (js klasörü için)
+js/node_modules/
+js/npm-debug.log*
+js/yarn-debug.log*
+js/yarn-error.log*
+js/coverage-ts/
+js/.pnp.*
+js/.yarn/*
+!js/.yarn/patches
+!js/.yarn/plugins
+!js/.yarn/releases
+!js/.yarn/sdks
+!js/.yarn/versions
+
+# Test & Geliştirme Ortamı
 tests/.phpunit.result.cache
 /tests/integration/tmp
 .vagrant
-.idea/*
-.vscode
-js/coverage-ts

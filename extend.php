@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Nearata\GifAvatars;
 
 use Flarum\Extend;
@@ -12,5 +14,5 @@ return [
     new Extend\Locales(__DIR__.'/locale'),
 
     (new Extend\ServiceProvider)
-        ->register(UserServiceProvider::class)
+        ->register(UserServiceProvider::class),
 ];

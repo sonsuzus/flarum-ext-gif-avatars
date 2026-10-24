@@ -1,7 +1,7 @@
 import app from "flarum/admin/app";
 
 app.initializers.add("nearata-gif-avatars", () => {
-  app.extensionData.for("nearata-gif-avatars").registerPermission(
+  app.registry.for("nearata-gif-avatars").registerPermission(
     {
       icon: "fas fa-user-tie",
       label: app.translator.trans(
