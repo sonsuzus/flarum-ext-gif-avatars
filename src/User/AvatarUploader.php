@@ -7,7 +7,7 @@ namespace Nearata\GifAvatars\User;
 use Flarum\User\User;
 use Illuminate\Contracts\Filesystem\Factory;
 use Illuminate\Support\Str;
-use Intervention\Image\Image;
+use Intervention\Image\Interfaces\ImageInterface; // Flarum 2.0 için yeni v3 Interface
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Process;
 
@@ -20,15 +20,27 @@ class AvatarUploader extends \Flarum\User\AvatarUploader
         parent::__construct($filesystemFactory);
     }
 
-    public function upload(User $user, Image $image): void
+    public function upload(User $user, ImageInterface $image): void
     {
-        if ($image->mime() !== 'image/gif' || $user->cannot('nearata-gif-avatars.use-gifs')) {
+        // Intervention Image v3'te mime ve dosya yolu origin() üzerinden alınır
+        $mime = clone $image;
+        $mediaType = $mime->origin()->mediaType();
+
+        if ($mediaType !== 'image/gif' || $user->cannot('nearata-gif-avatars.use-gifs')) {
             parent::upload($user, $image);
 
             return;
         }
 
-        $path = $image->basePath();
+        // Geçici yüklenen dosyanın orijinal yolunu alıyoruz
+        $path = $image->origin()->filePath();
+
+        // Eğer dosya yolu okunamadıysa standart yükleyiciye geri dön (hata vermemesi için güvenlik)
+        if (empty($path) || !file_exists($path)) {
+            parent::upload($user, $image);
+            
+            return;
+        }
 
         $this->gifsicle($path);
 
